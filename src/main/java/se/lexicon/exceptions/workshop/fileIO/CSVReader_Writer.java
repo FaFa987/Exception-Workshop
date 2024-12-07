@@ -17,7 +17,7 @@ public class CSVReader_Writer {
      *
      * @return List<String>of male firstnames
      */
-    public static List<String> getMaleFirstNames() {
+    public static List<String> getMaleFirstNames() throws IOException {
 
         BufferedReader reader = null;
         List<String> names = null;
@@ -37,11 +37,11 @@ public class CSVReader_Writer {
      *
      * @return List<String>of female firstnames
      */
-    public static List<String> getFemaleFirstNames() {
+    public static List<String> getFemaleFirstNames() throws IOException {
 
         List<String> names = null;
 
-        BufferedReader reader = Files.newBufferedReader(Paths.get("firstname_female.txt"))
+        BufferedReader reader = Files.newBufferedReader(Paths.get("firstname_female.txt"));
         names = reader.lines()
                 .flatMap(line -> Stream.of(line.split(",")))
                 .collect(Collectors.toList());
@@ -79,7 +79,7 @@ public class CSVReader_Writer {
     }
 
 
-    public static void saveLastNames(List<String> lastNames) {
+    public static void saveLastNames(List<String> lastNames) throws IOException {
 
         BufferedWriter writer = Files.newBufferedWriter(Paths.get("lastnames.txt"));
         for (String toWrite : lastNames) {
@@ -88,7 +88,7 @@ public class CSVReader_Writer {
         writer.flush();
     }
 
-    public static void saveFemaleNames(List<String> femaleNames) {
+    public static void saveFemaleNames(List<String> femaleNames) throws IOException {
         BufferedWriter writer = Files.newBufferedWriter(Paths.get("firstname_female.txt"));
         for (String toWrite : femaleNames) {
             writer.append(toWrite + ",");
@@ -98,7 +98,7 @@ public class CSVReader_Writer {
     }
 
 
-    public static void saveMaleNames(List<String> maleNames) {
+    public static void saveMaleNames(List<String> maleNames) throws IOException {
         BufferedWriter writer = Files.newBufferedWriter(Paths.get("firstname_males.txt"));
         for (String toWrite : maleNames) {
             writer.append(toWrite + ",");
